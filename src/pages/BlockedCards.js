@@ -6,12 +6,13 @@ import { useMainContext } from "../context/MainContext";
 export const BlockedCards = () => {
   const { allData, view } = useMainContext();
 
-  const myCards = allData?.data.filter(
+  const BlockedCards = allData?.data.filter(
     (details) => details.status === "blocked"
   );
-  console.log(allData);
 
-  const renderedCards = myCards.map((details) => <Card details={details} />);
+  const renderedCards = BlockedCards.map((details) => (
+    <Card details={details} />
+  ));
 
   return (
     <div
