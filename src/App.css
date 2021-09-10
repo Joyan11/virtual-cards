@@ -4,3 +4,13 @@
   font-weight: bold;
   color: black;
 }
+
+.box {
+  margin: auto 9rem;
+}
+
+@media screen and (max-width: 768px) {
+  .box {
+    margin: auto 1rem;
+  }
+}
