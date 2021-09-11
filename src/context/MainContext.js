@@ -12,6 +12,7 @@ const initialState = {
   cardType: [],
   cardHolder: "default",
   modal: false,
+  filteredData: [],
 };
 
 export const MainContext = ({ children }) => {

@@ -39,6 +39,11 @@ export const reducer = (state, action) => {
         ...state,
         modal: state.modal ? false : true,
       };
+    case "FILTERED_DATA":
+      return {
+        ...state,
+        filteredData: action.payload,
+      };
     default:
       return state;
   }
