@@ -13,7 +13,7 @@ import { Card } from "./Components/Card";
 function App() {
   return (
     <div className="App">
-      <main className="h-screen">
+      <main className="h-screen overflow-x-hidden overflow-y-scroll">
         <Navbar />
         <Routes>
           <Route path="/" element={<AllCards />} />
