@@ -9,9 +9,9 @@ const initialState = {
   currentUserid: 4,
   allData: allData,
   view: "grid",
-  sample: "yes",
   cardType: [],
-  cardHolder: "all",
+  cardHolder: "default",
+  modal: false,
 };
 
 export const MainContext = ({ children }) => {
