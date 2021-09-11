@@ -6,14 +6,14 @@ import { useMainContext } from "../context/MainContext";
 import { BsFilter } from "react-icons/bs";
 import { Search } from "../Components/AllCards/Search";
 import { FilterModal } from "../Components/AllCards/FilterModal";
+import { NoCardsFound } from "../Components/AllCards/NoCardsFound";
 
 export const AllCards = () => {
-  const { view, allData, cardType, cardHolder, modal, dispatch } =
+  const { view, allData, cardType, cardHolder, modal, dispatch, filteredData } =
     useMainContext();
   const [text, setText] = useState("");
   const [showInput, setShowInput] = useState(false);
   const [activateFilters, setActivateFilters] = useState(false);
-  const [filteredData, setFilteredData] = useState([]);
 
   const filterByCardType = (data, filter) => {
     if (filter.length > 0) {
@@ -40,7 +40,7 @@ export const AllCards = () => {
     const data = searchResult(
       filterByHolder(filterByCardType(allData.data, cardType), cardHolder)
     );
-    setFilteredData(data);
+    dispatch({ type: "FILTERED_DATA", payload: data });
   }, [activateFilters, text]);
 
   const renderedCards = React.Children.toArray(
@@ -75,6 +75,7 @@ export const AllCards = () => {
             setActivateFilters={setActivateFilters}
           />
         )}
+        {filteredData.length === 0 && <NoCardsFound />}
       </div>
     </section>
   );
