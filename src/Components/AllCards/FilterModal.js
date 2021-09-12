@@ -43,7 +43,7 @@ export const FilterModal = ({ data, setActivateFilters }) => {
                   name="subscription"
                   id="subscription"
                   onChange={cardTypeHandler}
-                  className="h-4 w-4"
+                  className="h-4 w-4 cursor-pointer"
                   checked={cardType.includes("subscription") ? true : false}
                 />
                 <label htmlFor="subscription">Subscription</label>
@@ -54,7 +54,7 @@ export const FilterModal = ({ data, setActivateFilters }) => {
                   name="burner"
                   id="burner"
                   onChange={cardTypeHandler}
-                  className="h-4 w-4"
+                  className="h-4 w-4 cursor-pointer"
                   checked={cardType.includes("burner") ? true : false}
                 />
                 <label htmlFor="burner">Burner</label>
@@ -66,7 +66,7 @@ export const FilterModal = ({ data, setActivateFilters }) => {
                 name="card-holder"
                 id="card-holder"
                 value={cardHolder}
-                className="border w-full p-2 bg-gray-200 rounded"
+                className="border w-full p-2 bg-gray-200 rounded cursor-pointer"
                 onChange={cardHolderHandler}>
                 <option value="default">Select cardholder</option>
                 {React.Children.toArray(
@@ -78,12 +78,12 @@ export const FilterModal = ({ data, setActivateFilters }) => {
             </div>
             <div className="flex justify-around pt-3">
               <button
-                className="px-12 py-1 bg-pink-700 rounded text-white font-semibold"
+                className="px-12 py-1 bg-pink-700 rounded shadow-md text-white font-semibold hover:bg-pink-800"
                 onClick={() => setActivateFilters((value) => !value)}>
                 Apply
               </button>
               <button
-                className="px-12 py-1 shadow-md rounded font-semibold"
+                className="px-12 py-1 shadow-md rounded font-semibold hover:bg-gray-100"
                 onClick={clearFilter}>
                 Clear
               </button>
