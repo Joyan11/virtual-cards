@@ -1,12 +1,28 @@
 /** @format */
 
+.filter-button {
+  @apply flex items-center px-4 py-1 bg-gray-200 rounded text-gray-500 font-semibold cursor-pointer;
+}
+
+.card-page {
+  @apply mt-2 md:mt-4 flex flex-wrap justify-center items-center;
+}
+
+.filter-modal {
+  @apply p-3 w-full max-w-xs md:max-w-sm  shadow-lg space-y-1 absolute bg-white top-32 md:top-40 right-6 md:right-40 rounded;
+}
+
+.card-icon {
+  @apply absolute shadow-md h-16 w-16 rounded-full top-8 right-5 flex items-center justify-center;
+}
+
 .active {
   font-weight: bold;
   color: black;
 }
 
 .box {
-  margin: auto 9rem;
+  margin: auto 5rem;
 }
 
 @media screen and (max-width: 768px) {
