@@ -34,7 +34,6 @@ export const AllCards = () => {
       if (observer.current) observer.current.disconnect();
       //get new observer
       observer.current = new IntersectionObserver((entries) => {
-        console.log(entries[0]);
         if (entries[0].isIntersecting && total > allData.length) {
           setPageNumber((pageNumber) => pageNumber + 1);
         }
