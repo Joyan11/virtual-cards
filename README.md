@@ -4,7 +4,13 @@
 
 [Project link] (https://virtual-cards-volopay.netlify.app/)
 
-### Installation
+### Tech Stack
+
+- React JS
+- Tailwind CSS
+- React router v6
+
+### Features
 
 - Card listing
 - Multiple Filters
