@@ -2,17 +2,16 @@
 
 export const reducer = (state, action) => {
   switch (action.type) {
+    case "SET_INITIAL_DATA":
+      return {
+        ...state,
+        allData: action.payload,
+      };
     case "CHANGE_VIEW":
       return {
         ...state,
         view: action.payload === "grid" ? "grid" : "list",
       };
-    // case "FILTERS":
-    //   return {
-    //     ...state,
-    //     cardType: action.payload.cardType,
-    //     cardHolder: action.payload.cardHolder,
-    //   };
     case "CLEAR_FILTERS":
       return {
         ...state,
