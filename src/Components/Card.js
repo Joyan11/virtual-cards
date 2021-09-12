@@ -15,7 +15,7 @@ export const Card = ({ details }) => {
   return (
     <>
       {details && (
-        <div className="p-5 w-full max-w-xl shadow-lg space-y-4 relative">
+        <div className="card">
           <div className="card-icon">
             {details.card_type === "burner" ? (
               <ImFire className="text-2xl text-pink-700" />

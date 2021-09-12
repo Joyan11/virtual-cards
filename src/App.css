@@ -9,16 +9,29 @@
 }
 
 .filter-modal {
-  @apply p-3 w-full max-w-xs md:max-w-sm  shadow-lg space-y-1 absolute bg-white top-32 md:top-40 right-6 md:right-40 rounded;
+  @apply p-3 w-full max-w-xs md:max-w-sm  shadow-lg space-y-1 absolute bg-white top-32 md:top-40 right-6 md:right-40 rounded transition;
 }
 
 .card-icon {
   @apply absolute shadow-md h-16 w-16 rounded-full top-8 right-5 flex items-center justify-center;
 }
 
+.card {
+  @apply p-5 w-full max-w-xl shadow-lg space-y-4 relative hover:shadow-xl transition delay-75;
+}
+
+.heading-nav {
+  @apply flex flex-col space-y-2 md:space-y-0 md:flex-row justify-between px-5 md:px-20 py-2 items-start md:items-center flex-wrap;
+}
+
+.learn-more {
+  @apply flex items-center text-blue-400 font-semibold bg-gray-100 rounded px-1 space-x-1 cursor-pointer;
+}
+
 .active {
   font-weight: bold;
   color: black;
+  font-size: 1.1rem;
 }
 
 .box {
