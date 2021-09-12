@@ -7,7 +7,7 @@ const mainContext = createContext();
 
 const initialState = {
   currentUserid: 4,
-  allData: allData,
+  allData: [],
   view: "grid",
   cardType: [],
   cardHolder: "default",
