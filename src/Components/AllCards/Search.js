@@ -12,8 +12,8 @@ export const Search = ({ showInput, setShowInput, setText }) => {
       {showInput && (
         <input
           type="text"
+          autoFocus
           onChange={(e) => setText(e.target.value)}
-          autofocus
           className="ring-2 ring-pink-500 focus:ring-pink-700 focus:ring-4 outline-none rounded px-2 w-full max-w-sm "
         />
       )}
