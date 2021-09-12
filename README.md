@@ -6,6 +6,13 @@
 
 ### Installation
 
+- Card listing
+- Multiple Filters
+- Search by card name
+- infinite scrolling
+
+### Installation
+
 Node.js and npm are required on the system to install and run its dependencies
 
 ```sh
