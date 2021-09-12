@@ -1,7 +1,8 @@
 /** @format */
 
-import React, { useState } from "react";
+import React from "react";
 import { useMainContext } from "../../context/MainContext";
+import { removeDuplicates } from "./util/removeDuplicates";
 
 export const FilterModal = ({ data, setActivateFilters }) => {
   const { cardHolder, cardType, dispatch } = useMainContext();
@@ -25,35 +26,35 @@ export const FilterModal = ({ data, setActivateFilters }) => {
 
   return (
     <div className="h-full w-full bg-opacity-40 absolute top-0 right-0 bg-black">
-      <div className="p-3 w-full max-w-xs md:max-w-sm  shadow-lg space-y-1 absolute bg-white top-32 right-7 md:right-40 rounded">
+      <div className="filter-modal">
         <div className="border-b-2 flex justify-between">
           <h3 className="text-1xl font-semibold ">Filters</h3>
           <button onClick={() => dispatch({ type: "SHOW_MODAL" })}>
             Close
           </button>
         </div>
-
         <div className="p-3">
           <div className="space-y-4">
             <h3 className="text-gray-500 font-semibold">Type</h3>
             <div className="card-type-filter flex space-x-10">
-              <div className="space-x-1">
+              <div className="space-x-1 flex items-center">
                 <input
                   type="checkbox"
                   name="subscription"
                   id="subscription"
                   onChange={cardTypeHandler}
+                  className="h-4 w-4"
                   checked={cardType.includes("subscription") ? true : false}
                 />
                 <label htmlFor="subscription">Subscription</label>
               </div>
-
-              <div className="space-x-1">
+              <div className="space-x-1 flex items-center">
                 <input
                   type="checkbox"
                   name="burner"
                   id="burner"
                   onChange={cardTypeHandler}
+                  className="h-4 w-4"
                   checked={cardType.includes("burner") ? true : false}
                 />
                 <label htmlFor="burner">Burner</label>
@@ -69,10 +70,8 @@ export const FilterModal = ({ data, setActivateFilters }) => {
                 onChange={cardHolderHandler}>
                 <option value="default">Select cardholder</option>
                 {React.Children.toArray(
-                  data.map((details) => (
-                    <option value={details.owner_name}>
-                      {details.owner_name}
-                    </option>
+                  removeDuplicates(data).map((details) => (
+                    <option value={details}>{details}</option>
                   ))
                 )}
               </select>
