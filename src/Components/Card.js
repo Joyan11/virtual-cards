@@ -15,8 +15,8 @@ export const Card = ({ details }) => {
   return (
     <>
       {details && (
-        <div className="p-5 m-2 md:m-5 w-full max-w-lg shadow-lg space-y-4 relative">
-          <div className="absolute shadow-md h-16 w-16 rounded-full top-8 right-10 flex items-center justify-center">
+        <div className="p-5 w-full max-w-xl shadow-lg space-y-4 relative">
+          <div className="card-icon">
             {details.card_type === "burner" ? (
               <ImFire className="text-2xl text-pink-700" />
             ) : (
