@@ -17,12 +17,12 @@ export const Navbar = () => {
             <span>Learn more</span>
           </span>
         </div>
-        <button className="self-end flex items-center space-x-3 px-3 py-1 font-semibold shadow-md">
+        <button className="virtual-card">
           <AiOutlinePlus />
           <span>Virtual Card</span>
         </button>
       </div>
-      <div className="flex justify-between px-5 md:px-20 py-3 border-solid border-coolgray-300 border-b-2 items-center">
+      <div className="navlink border-coolgray-300">
         <div className="flex space-x-3 text-gray-400 text-1xl items-center">
           <NavLink to="/mycards" activeClassName="active" end>
             Your
