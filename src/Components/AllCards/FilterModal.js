@@ -76,14 +76,14 @@ export const FilterModal = ({ data, setActivateFilters }) => {
                 )}
               </select>
             </div>
-            <div className="flex justify-around pt-3">
+            <div className="flex justify-between pt-3">
               <button
-                className="px-12 py-1 bg-pink-700 rounded shadow-md text-white font-semibold hover:bg-pink-800"
+                className="px-10 md:px-14 py-1 bg-pink-700 rounded shadow-md text-white font-semibold hover:bg-pink-800"
                 onClick={() => setActivateFilters((value) => !value)}>
                 Apply
               </button>
               <button
-                className="px-12 py-1 shadow-md rounded font-semibold hover:bg-gray-100"
+                className="px-10 md:px-14 py-1 shadow-md rounded font-semibold hover:bg-gray-100"
                 onClick={clearFilter}>
                 Clear
               </button>
