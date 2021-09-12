@@ -1,51 +1,75 @@
 /** @format */
 
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import {
+  FilterButton,
+  FilterModal,
+  NoCardsFound,
+  Search,
+} from "../Components/AllCards";
 import { Card } from "../Components/Card";
 import { useMainContext } from "../context/MainContext";
-import { BsFilter } from "react-icons/bs";
-import { Search } from "../Components/AllCards/Search";
-import { FilterModal } from "../Components/AllCards/FilterModal";
-import { NoCardsFound } from "../Components/AllCards/NoCardsFound";
+import { useFetch } from "../hooks/useFetch";
+import {
+  filterByCardType,
+  filterByHolder,
+  searchResult,
+} from "../utils/filters";
 
 export const AllCards = () => {
   const { view, allData, cardType, cardHolder, modal, dispatch, filteredData } =
     useMainContext();
+  const [pageNumber, setPageNumber] = useState(1);
+  const [loading, total] = useFetch(pageNumber);
   const [text, setText] = useState("");
   const [showInput, setShowInput] = useState(false);
   const [activateFilters, setActivateFilters] = useState(false);
 
-  const filterByCardType = (data, filter) => {
-    if (filter.length > 0) {
-      return data.filter((cardData) => filter.includes(cardData.card_type));
-    } else {
-      return data;
-    }
-  };
-  const filterByHolder = (prevdata, filter) => {
-    if (filter !== "default") {
-      return prevdata.filter((cardData) => cardData.owner_name === filter);
-    } else {
-      return prevdata;
-    }
-  };
+  //infinite scrolling
+  const observer = useRef();
+  const lastElement = useCallback(
+    (node) => {
+      if (loading) return;
+      //disconnect previous observer
+      if (observer.current) observer.current.disconnect();
+      //get new observer
+      observer.current = new IntersectionObserver((entries) => {
+        console.log(entries[0]);
+        if (entries[0].isIntersecting && total > allData.length) {
+          setPageNumber((pageNumber) => pageNumber + 1);
+        }
+      });
+      //connect new observer
+      if (node) observer.current.observe(node);
+    },
+    [loading]
+  );
 
-  const searchResult = (prevData) => {
-    return prevData.filter((details) =>
-      details.name.toLowerCase().trim().includes(text.toLowerCase().trim())
-    );
-  };
-
+  //filter only applied on clicking apply
   useEffect(() => {
+    //multiple filters through function composition
     const data = searchResult(
-      filterByHolder(filterByCardType(allData.data, cardType), cardHolder)
+      filterByHolder(filterByCardType(allData, cardType), cardHolder),
+      text
     );
     dispatch({ type: "FILTERED_DATA", payload: data });
-  }, [activateFilters, text]);
+  }, [activateFilters, text, allData]);
 
   const renderedCards = React.Children.toArray(
-    filteredData.map((details) => {
-      return <Card details={details} />;
+    filteredData?.map((details, index) => {
+      if (allData.length === index + 1) {
+        return (
+          <div ref={lastElement} className=" m-2 md:m-5 w-full max-w-xl">
+            <Card details={details} />
+          </div>
+        );
+      } else {
+        return (
+          <div className=" m-2 md:m-5 w-full max-w-xl">
+            <Card details={details} />
+          </div>
+        );
+      }
     })
   );
 
@@ -57,25 +81,16 @@ export const AllCards = () => {
           setText={setText}
           showInput={showInput}
         />
-        <button
-          onClick={() => dispatch({ type: "SHOW_MODAL" })}
-          className="flex items-center px-4 py-1 bg-gray-200 rounded text-gray-500 font-semibold cursor-pointer">
-          <BsFilter className="text-2xl" />
-          <span>Filter</span>
-        </button>
+        <FilterButton />
       </div>
       <div
-        className={`mt-2 md:mt-4 flex flex-wrap justify-center items-center ${
-          view === "list" ? "flex-col" : "flex-row"
-        } `}>
+        className={`card-page ${view === "list" ? "flex-col" : "flex-row"} `}>
         {renderedCards}
         {modal && (
-          <FilterModal
-            data={allData.data}
-            setActivateFilters={setActivateFilters}
-          />
+          <FilterModal data={allData} setActivateFilters={setActivateFilters} />
         )}
-        {filteredData.length === 0 && <NoCardsFound />}
+        {filteredData?.length === 0 && loading === false && <NoCardsFound />}
+        {loading && <p className="text-3xl pt-2">Loading...</p>}
       </div>
     </section>
   );
